@@ -2,9 +2,10 @@ var MemoryGameEngine = /** @class */ (function () {
     /**
      * constructor
      */
-    function MemoryGameEngine(container, cards, resetDelay, level) {
+    function MemoryGameEngine(container, cards, resetDelay, level, cssClassName) {
         if (resetDelay === void 0) { resetDelay = -1; }
         if (level === void 0) { level = 2; }
+        if (cssClassName === void 0) { cssClassName = ''; }
         var _this = this;
         /**
          * private
@@ -12,12 +13,12 @@ var MemoryGameEngine = /** @class */ (function () {
         this.EMPTY = '';
         this.DIV = 'div';
         this.CLICK = 'click';
-        this.CSSCLASS = 'board';
         this.CREATED_EVENT_NAME = ':created';
         this.STARTED_EVENT_NAME = ':started';
         this.ATTEMPT_EVENT_NAME = ':attempt';
         this.OVER_EVENT_NAME = ':over';
         this.END_EVENT_NAME = ':end';
+        this._cssClassName = '';
         this._picks = new Array();
         this._solved = new Array();
         this._level = 2;
@@ -29,13 +30,14 @@ var MemoryGameEngine = /** @class */ (function () {
         /**
          * public
          */
-        this.VERSION = '1.0.0.0';
+        this.VERSION = '1.0.0.1';
         this.NAME = 'MemoryGameEngine';
         this.ALIAS = 'mge';
         this.DESCRIPTION = 'An engine for memory game building.';
         this.board = document.createElement(this.DIV);
         this.attempts = 0;
         this.container = container;
+        this._cssClassName = cssClassName;
         this.cards = cards;
         this._level = level;
         this._resetDelay = resetDelay < 300 ? -1 : resetDelay;
@@ -81,7 +83,7 @@ var MemoryGameEngine = /** @class */ (function () {
         shuffle(this.cards);
         this.attempts = 0;
         this.board = document.createElement(this.DIV);
-        this.board.classList.add(this.CSSCLASS);
+        this.board.classList.add(this._cssClassName);
         this.cards.forEach(function (v, i) {
             var slot = document.createElement(_this.DIV);
             slot.tabIndex = i;

@@ -6,13 +6,13 @@ class MemoryGameEngine {
     private readonly EMPTY: string = '';
     private readonly DIV: string = 'div';
     private readonly CLICK: string = 'click';
-    private readonly CSSCLASS: string = 'board';
     private readonly CREATED_EVENT_NAME: string = ':created';
     private readonly STARTED_EVENT_NAME: string = ':started';
     private readonly ATTEMPT_EVENT_NAME: string = ':attempt';
     private readonly OVER_EVENT_NAME: string = ':over';
     private readonly END_EVENT_NAME: string = ':end';
   
+    private _cssClassName: string = '';
     private _picks: Array<number> = new Array();
     private _solved: Array<number> = new Array();
     private _level: number = 2;
@@ -24,7 +24,7 @@ class MemoryGameEngine {
   /**
    * public
    */  
-    public readonly VERSION: string = '1.0.0.0'; 
+    public readonly VERSION: string = '1.0.0.1'; 
     public readonly NAME: string = 'MemoryGameEngine';
     public readonly ALIAS: string = 'mge';
     public readonly DESCRIPTION: string = 'An engine for memory game building.';  
@@ -36,8 +36,9 @@ class MemoryGameEngine {
   /**
    * constructor
    */  
-    constructor(container: HTMLElement, cards: Array<HTMLElement>, resetDelay: number = -1, level: number = 2) {
+    constructor(container: HTMLElement, cards: Array<HTMLElement>, resetDelay: number = -1, level: number = 2, cssClassName: string = '') {
       this.container = container;
+      this._cssClassName = cssClassName;
       this.cards = cards;
       this._level = level;
       this._resetDelay = resetDelay < 300 ? -1 : resetDelay;
@@ -84,7 +85,7 @@ class MemoryGameEngine {
 
       this.attempts = 0;
       this.board = document.createElement(this.DIV);
-      this.board.classList.add(this.CSSCLASS);
+      this.board.classList.add(this._cssClassName);
       this.cards.forEach((v, i) => {
         let slot = document.createElement(this.DIV);
         slot.tabIndex = i;
