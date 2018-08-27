@@ -24,7 +24,7 @@ class MemoryGameEngine {
   /**
    * public
    */  
-    public readonly VERSION: string = '1.0.0.1'; 
+    public readonly VERSION: string = '1.0.1'; 
     public readonly NAME: string = 'MemoryGameEngine';
     public readonly ALIAS: string = 'mge';
     public readonly DESCRIPTION: string = 'An engine for memory game building.';  
